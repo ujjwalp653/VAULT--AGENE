@@ -1,0 +1,31 @@
+VAULT v2.4 TEST REPORT
+======================
+
+Python compileall: PASS
+Frontend JavaScript syntax (node --check): PASS
+Pytest suite: PASS (4 passed)
+
+Covered by the integration suite:
+- 8-node startup and heartbeat discovery
+- concurrent object uploads
+- multi-file batch upload (3 files)
+- RF/W/R policy enforcement
+- chunking
+- concurrent reads
+- node failure detection
+- automatic replica repair
+- byte corruption detection and repair
+- stale replica version inconsistency detection and repair
+- network partition and heal
+- safe rebalancing endpoint / RF preservation
+- API/static asset contract
+- node storage telemetry fields: storage_utilization, activity_load, total_ops
+- SHA-256 unit verification
+
+Notes:
+- The storage load shown by the UI is now precise; tiny files on a 10 GB node no longer round to 0%.
+- Node activity is reported separately from storage utilization, with a decaying activity signal driven by real node operations.
+- The UI now supports multi-file upload through /api/objects/batch with partial-success reporting.
+- Failure/chaos buttons are guarded against double clicks while an operation is running.
+- The UI prevents integrity-injection actions against nodes that do not contain the selected object's replica.
+- No claim of absolute zero failure is made; the system is tested against the included automated cases and reports actionable API/operation errors to the user.
